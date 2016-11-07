@@ -4,12 +4,20 @@
 <li>JDK 1.7+</li>
 </ul>
 
-<h3>Build using by Maven</h3>
-mvn install
+<h3>Build using by Maven:</h3>
+<ul>
+<li>mvn install</li>
+</ul>
 
-<h3>Git versions</h3>
-git tag -a v1.1 -m <message>
 
-<h3> Run tests</h3>
-Maven :
-mvn test
+<h3>Git versions:</h3>
+<ul>
+<li>git tag -a v1.1 -m </li>
+</ul>
+
+
+<h3>Run tests using by Maven:</h3>
+<ul>
+<li>mvn test</li>
+</ul>
+
