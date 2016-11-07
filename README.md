@@ -1,15 +1,15 @@
-# lab-3 InstagramPhoneCloner
-Required software:
+# InstagramPhoneCloner (lab-3)
+<h3>Required software:</h3>
+<ul>
+<li>JDK 1.7+</li>
+</ul>
 
-JDK 1.7+
-Build
-
+<h3>Build using by Maven</h3>
 mvn install
 
-Git versions
+<h3>Git versions</h3>
+git tag -a v1.1 -m <message>
 
-git tag -a v1.1 -m
-
-Run tests
-
-Maven : mvn test
+<h3> Run tests</h3>
+Maven :
+mvn test
