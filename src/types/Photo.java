@@ -1,4 +1,4 @@
-﻿package types;
+package types;
 
 import java.util.Iterator;
 import java.util.LinkedList;

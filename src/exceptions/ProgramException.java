@@ -1,4 +1,4 @@
-﻿package exceptions;
+package exceptions;
 
 public class ProgramException extends Exception {
 	private static final long serialVersionUID = 1L;

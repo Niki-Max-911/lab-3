@@ -1,4 +1,4 @@
-﻿package instagramApi;
+package instagramApi;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
