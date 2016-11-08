@@ -48,57 +48,6 @@ public class InstagramWeb {
 		this.api = new InstagramApi(instaToken, connector);
 	}
 
-	public synchronized boolean follow(String userId) throws AuthenticationException, ExceededLimitsApi, IOException {
-		HttpUriRequest post = RequestBuilder.post().setUri("/web/friendships/" + userId + "/follow/")
-				.addHeader("Accept", "*/*").addHeader("Accept-Encoding", "gzip,deflate,sdch")
-				.addHeader("Connection", "keep-alive").addHeader("Host", "instagram.com")
-				.addHeader("Referer", "https://instagram.com/").addHeader("Origin", "https://instagram.com")
-				.addHeader("X-CSRFToken", this.instaToken.getActivatedToken()).addHeader("X-Instagram-AJAX", "1")
-				.addHeader("X-Requested-With", "XMLHttpRequest").build();
-
-		CloseableHttpResponse response = connector.getResp(post);
-		if (response == null)
-			return false;
-
-		HttpEntity entity = response.getEntity();
-
-		try {
-			String ans = EntityUtils.toString(entity);
-			checkExceededLimits(response, ans);
-			response.close();
-			return isAnswerOk(ans);
-		} catch (IOException e) {
-			return false;
-		} finally {
-			HttpClientUtils.closeQuietly(response);
-		}
-	}
-
-	public synchronized boolean unfollow(String userId) throws AuthenticationException, ExceededLimitsApi, IOException {
-		HttpUriRequest post = RequestBuilder.post().setUri("/web/friendships/" + userId + "/unfollow/")
-				.addHeader("Accept", "*/*").addHeader("Accept-Encoding", "gzip,deflate,sdch")
-				.addHeader("Connection", "keep-alive").addHeader("Host", "instagram.com")
-				.addHeader("Referer", "https://instagram.com/").addHeader("Origin", "https://instagram.com")
-				.addHeader("X-CSRFToken", this.instaToken.getActivatedToken()).addHeader("X-Instagram-AJAX", "1")
-				.addHeader("X-Requested-With", "XMLHttpRequest").build();
-
-		CloseableHttpResponse response = connector.getResp(post);
-		if (response == null)
-			return false;
-
-		HttpEntity entity = response.getEntity();
-
-		try {
-			String ans = EntityUtils.toString(entity);
-			checkExceededLimits(response, ans);
-			response.close();
-			return isAnswerOk(ans);
-		} catch (IOException e) {
-			return false;
-		} finally {
-			HttpClientUtils.closeQuietly(response);
-		}
-	}
 
 	public synchronized boolean setComentar(String photoId, String comment_text)
 			throws AuthenticationException, ExceededLimitsApi, IOException {
@@ -130,38 +79,7 @@ public class InstagramWeb {
 		}
 	}
 
-	public synchronized boolean setLike(String photoId) throws AuthenticationException, ExceededLimitsApi, IOException {
-		HttpUriRequest post = RequestBuilder.post().setUri("/web/likes/" + photoId + "/like/")
-				.addHeader("Accept", "*/*").addHeader("Accept-Encoding", "gzip,deflate,sdch")
-				.addHeader("Connection", "keep-alive").addHeader("Host", "instagram.com")
-				.addHeader("Origin", "https://instagram.com").addHeader("Referer", "https://instagram.com/")
-				.addHeader("X-CSRFToken", this.instaToken.getActivatedToken()).addHeader("X-Instagram-AJAX", "1")
-				.addHeader("X-Requested-With", "XMLHttpRequest").build();
-
-		CloseableHttpResponse response = connector.getResp(post);
-		if (response == null)
-			return false;
-		HttpEntity entity = response.getEntity();
-
-		try {
-			String ans = EntityUtils.toString(entity);
-
-			if (!isAnswerOk(ans)) {
-				System.out.println(ans);
-			}
-
-			checkExceededLimits(response, ans);
-			response.close();
-			return isAnswerOk(ans);
-		} catch (IOException e) {
-			System.out.println(":(");
-			return false;
-		} finally {
-			HttpClientUtils.closeQuietly(response);
-		}
-	}
-
-	public InputStream loadPhoto(String way) throws IOException {
+	public static InputStream loadPhoto(String way) throws IOException {
 		URL connection = new URL(way);
 		HttpURLConnection urlconn;
 		urlconn = (HttpURLConnection) connection.openConnection();
@@ -169,23 +87,6 @@ public class InstagramWeb {
 		urlconn.connect();
 		InputStream in = urlconn.getInputStream();
 		return in;
-	}
-
-	public String loadNotifications() throws IOException, AuthenticationException {
-		HttpUriRequest getNotifi = RequestBuilder.get().setUri("/api/v1/news/inbox/")
-				.addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
-				.addHeader("Accept-Encoding", "gzip, deflate, sdch")
-				.addHeader("Accept-Language", "uk,en-US;q=0.8,en;q=0.6").addHeader("Connection", "keep-alive")
-				.addHeader("Host", "instagram.com").addHeader("Upgrade-Insecure-Requests", "1").build();
-
-		CloseableHttpResponse response = connector.getResp(getNotifi);
-		try {
-			String ans = EntityUtils.toString(response.getEntity());
-			return ans;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
 	}
 
 	public String loadPageEdit(String myUserName) throws IOException {
@@ -200,57 +101,6 @@ public class InstagramWeb {
 		CloseableHttpResponse response = connector.getResp(get);
 		connector.setContextAtribute("TagResearch", false);
 		HttpEntity entity = response.getEntity();
-		if (response.getStatusLine().getStatusCode() == 200) {
-			String strAns = EntityUtils.toString(entity);
-			response.close();
-			HttpClientUtils.closeQuietly(response);
-			return strAns;
-		}
-		return "";
-	}
-
-	public String uploadPageEdit(PageInfo myPageInfo) throws IOException {
-
-		LinkedList<NameValuePair> entLst = new LinkedList<NameValuePair>();
-		entLst.add(new BasicNameValuePair("csrfmiddlewaretoken", instaToken.getCsrftoken()));
-
-		try {
-			entLst.add(new BasicNameValuePair("first_name",
-					new String(myPageInfo.getName().getBytes("UTF-8"), "ISO8859-1")));
-			entLst.add(
-					new BasicNameValuePair("email", new String(myPageInfo.getMail().getBytes("UTF-8"), "ISO8859-1")));
-			entLst.add(new BasicNameValuePair("username",
-					new String(myPageInfo.getUserName().getBytes("UTF-8"), "ISO8859-1")));
-			entLst.add(new BasicNameValuePair("phone_number",
-					new String(myPageInfo.getPhone().getBytes("UTF-8"), "ISO8859-1")));
-			entLst.add(new BasicNameValuePair("gender", myPageInfo.getSex()));
-			entLst.add(new BasicNameValuePair("biography",
-					new String(myPageInfo.getBio().getBytes("UTF-8"), "ISO8859-1")));
-			entLst.add(new BasicNameValuePair("external_url",
-					new String(myPageInfo.getWebSite().getBytes("UTF-8"), "ISO8859-1")));
-		} catch (UnsupportedEncodingException e) {
-		}
-
-		if (myPageInfo.isCheckBoxSelected()) {
-			entLst.add(new BasicNameValuePair("chaining_enabled", "on"));
-		}
-		HttpEntity requestEntity = EntityBuilder.create().setParameters(entLst).setContentEncoding("ISO8859-1")
-				.setContentType(ContentType.APPLICATION_FORM_URLENCODED).build();
-
-		HttpUriRequest post = RequestBuilder.post().setUri("/accounts/edit/")
-				.addHeader("Accept", "text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,*/*q=0.8")
-				.addHeader("Accept-Encoding", "gzip,deflate,sdch").addHeader("Connection", "keep-alive")
-				.addHeader("Content-Type", "application/x-www-form-urlencoded")
-				.addHeader("Referer", "https://instagram.com/accounts/edit/")
-				.addHeader("Origin", "https://instagram.com").setEntity(requestEntity)
-				.addHeader("Host", "instagram.com").build();
-
-		connector.setContextAtribute("TagResearch", true);
-		CloseableHttpResponse response = connector.getResp(post);
-		connector.setContextAtribute("TagResearch", false);
-
-		HttpEntity entity = response.getEntity();
-
 		if (response.getStatusLine().getStatusCode() == 200) {
 			String strAns = EntityUtils.toString(entity);
 			response.close();
@@ -293,17 +143,6 @@ public class InstagramWeb {
 
 	public Page loadPageByUserName(String userName) throws NoPageException, IOException {
 		return loadPageByUserName(connector, userName);
-	}
-
-	public Page loadPageByUserId(String userId) throws AuthenticationException, IOException {
-
-		String methodEntity = "ig_user(" + userId + ") {" + "	  id," + "    username," + "    biography,"
-				+ "    requested_by_viewer," + "    followed_by_viewer," + "    follows_viewer," + "    full_name,"
-				+ "    profile_pic_url," + "    is_private," + "    follows{" + "		count" + "	  },"
-				+ "    followed_by{" + "		count" + "	  }," + "    media{" + "		count" + "	  }" + "}";
-
-		String strAns = executeInternalQuery(methodEntity, "users::show");
-		return new Page(strAns);
 	}
 
 	public ListWithCursor<Photo> loadPagePhotos(String userId) throws AuthenticationException, IOException {
@@ -469,36 +308,6 @@ public class InstagramWeb {
 		} finally {
 			HttpClientUtils.closeQuietly(response);
 		}
-	}
-
-	public static boolean changePassword(Connector connector, String link, String password) throws IOException {
-
-		LinkedList<NameValuePair> entLst = new LinkedList<NameValuePair>();
-		entLst.add(new BasicNameValuePair("new_password1", password));
-		entLst.add(new BasicNameValuePair("new_password2", password));
-		HttpEntity entity = EntityBuilder.create().setParameters(entLst).setContentEncoding("UTF-8")
-				.setContentType(ContentType.APPLICATION_FORM_URLENCODED).build();
-
-		HttpUriRequest req = RequestBuilder.post().setUri("/" + link.replaceFirst("https?://instagram.com", ""))
-				.addHeader("Accept", "text/html,phone/xhtml+xml,phone/xml;q=0.9,image/webp,*/*;q=0.8")
-				.addHeader("Accept-Encoding", "gzip,deflate,sdch").addHeader("Connection", "keep-alive")
-				.addHeader("Content-Type", "application/x-www-form-urlencoded").addHeader("Referer", link)
-				.addHeader("Host", "instagram.com").setEntity(entity).build();
-
-		CloseableHttpResponse response = connector.getResp(req);
-
-		if (response == null)
-			return false;
-
-		int code = response.getStatusLine().getStatusCode();
-
-		try {
-			response.close();
-		} catch (IOException e) {
-		}
-
-		HttpClientUtils.closeQuietly(response);
-		return (code == 302);
 	}
 
 	public synchronized InstagramApi api() {
