@@ -1,4 +1,4 @@
-package windows;
+package ui;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -12,7 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import entitys.PhotoCloner;
+import entity.PhotoCloner;
 
 public class ControlRecipientPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

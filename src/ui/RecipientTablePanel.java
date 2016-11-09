@@ -1,4 +1,4 @@
-package windows;
+package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,7 +13,7 @@ import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import entitys.PhotoCloner;
+import entity.PhotoCloner;
 
 public class RecipientTablePanel extends JPanel {
 	private static final long serialVersionUID = 1L;

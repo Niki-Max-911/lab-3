@@ -1,8 +1,8 @@
-package windows;
+package ui;
 
 import javax.swing.table.AbstractTableModel;
 
-import entitys.PhotoCloner;
+import entity.PhotoCloner;
 
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package instagramApi;
+package api.models;
 
 import java.util.Collection;
 import java.util.LinkedList;

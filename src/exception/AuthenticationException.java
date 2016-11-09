@@ -1,10 +1,10 @@
-package exceptions;
+package exception;
 
 /**
  * Помилка авторизації
  * @author Maksim
  */
-public class AuthenticationException extends Exception {
+public class AuthenticationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private String message;
 	

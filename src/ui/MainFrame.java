@@ -1,4 +1,4 @@
-package windows;
+package ui;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -11,12 +11,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import entitys.Donor;
-import entitys.PhotoCloner;
-import entitys.Recipient;
+import entity.Donor;
+import entity.PhotoCloner;
+import entity.Recipient;
 
-import exceptions.AuthenticationException;
-import exceptions.NoPageException;
+import exception.AuthenticationException;
+import exception.NoPageException;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;

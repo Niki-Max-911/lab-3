@@ -1,17 +1,9 @@
-package windows;
+package ui;
 
-import java.awt.Color;
-
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import java.awt.*;
 
 public class DonorPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +23,7 @@ public class DonorPanel extends JPanel {
 		setLayout(null);
 
 		txtDonorLink = new JTextField();
-		txtDonorLink.setText("https://instagram.com/roman_liuk");
+		txtDonorLink.setText("https://www.instagram.com/roman_liuk/");
 		txtDonorLink.setBounds(23, 42, 258, 20);
 		add(txtDonorLink);
 		txtDonorLink.setColumns(10);
@@ -51,7 +43,7 @@ public class DonorPanel extends JPanel {
 		scrollPane.setColumnHeaderView(lbl4);
 
 		spnrCountPhotoToLoad = new JSpinner();
-		spnrCountPhotoToLoad.setModel(new SpinnerNumberModel(0, 0, 1000, 10));
+		spnrCountPhotoToLoad.setModel(new SpinnerNumberModel(2, 0, 20, 1));
 		spnrCountPhotoToLoad.setBounds(79, 73, 46, 20);
 		add(spnrCountPhotoToLoad);
 
