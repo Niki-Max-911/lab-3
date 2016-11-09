@@ -1,7 +1,7 @@
-# InstagramPhoneCloner (lab-3)
+# IG Cloner (lab-3)
 <h3>Required software:</h3>
 <ul>
-<li>JDK 1.7+</li>
+<li>JDK 1.8+</li>
 </ul>
 
 <h3>Build using by Maven:</h3>
