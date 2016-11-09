@@ -89,11 +89,33 @@
       </plugin>
 
       <plugin>
+        <groupId>ru.concerteza.buildnumber</groupId>
+        <artifactId>maven-jgit-buildnumber-plugin</artifactId>
+        <version>1.2.9</version>
+
+        <executions>
+          <execution>
+            <id>git-buildnumber</id>
+            <goals>
+              <goal>extract-buildnumber</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <branchProperty>production</branchProperty>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.6</version>
         <configuration>
           <archive>
+            <manifestEntries>
+              <X-Git-Last-Tag>${git.tag}</X-Git-Last-Tag>
+            </manifestEntries>
             <index>true</index>
             <manifest>
               <mainClass>ui.MainFrame</mainClass>
