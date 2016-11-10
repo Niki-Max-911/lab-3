@@ -1,5 +1,3 @@
-package test;
-
 import api.Environment;
 import connector.ConnectionFactory;
 import connector.Connector;

@@ -1,18 +1,12 @@
 package ui;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
+import entity.PhotoCloner;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import entity.PhotoCloner;
 
 public class ControlRecipientPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

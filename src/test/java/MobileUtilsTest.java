@@ -1,5 +1,3 @@
-package test;
-
 import api.InstagramAgent;
 import api.MobileUtils;
 import org.apache.http.Header;

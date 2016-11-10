@@ -22,7 +22,7 @@ public class Version {
         try {
             URL url = cl.findResource("META-INF/MANIFEST.MF");
             Manifest manifest = new Manifest(url.openStream());
-            manifest.getMainAttributes().forEach((o, o2) -> System.out.println(o + " : " + o2));
+//            manifest.getMainAttributes().forEach((o, o2) -> System.out.println(o + " : " + o2));
             String value = manifest.getMainAttributes().getValue(MANIFEST_ATTRIBUTE);
             if (value != null) {
                 productVersion = value;

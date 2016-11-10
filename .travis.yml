@@ -1,0 +1,6 @@
+language: java
+install: mvn package
+jdk:
+- oraclejdk8
+script:
+- mvn pmd:pmd
