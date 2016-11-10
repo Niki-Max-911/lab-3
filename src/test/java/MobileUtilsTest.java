@@ -16,7 +16,7 @@ public class MobileUtilsTest {
     @Test
     public void testSign() {
         String targetString = "Hello KPI!";
-        String expectedSig = "!259c2801ef955f4e1152a466fdaf66f7f6d9d5775dc5df83ae0f1f8507942a51";
+        String expectedSig = "259c2801ef955f4e1152a466fdaf66f7f6d9d5775dc5df83ae0f1f8507942a51";
 
         String sig = MobileUtils.getSig(targetString);
         Assert.assertEquals("Sign key form target text", expectedSig, sig);
