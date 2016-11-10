@@ -11,7 +11,7 @@ import java.net.URLEncoder;
 import java.security.Key;
 import java.util.*;
 
-class MobileUtils {
+public class MobileUtils {
     static String[] resolutions = {"720x1280", "320x480", "480x800", "1024x768", "1280x720", "768x1024",
             "480x320"};
     static String[] models = {"GT-N7000", "SM-N9000", "GT-I9220", "GT-I9100"};
@@ -56,7 +56,7 @@ class MobileUtils {
         return entStrBuilder.toString();
     }
 
-    static String getSig(String text) {
+    public static String getSig(String text) {
         String textUTF8 = toUTF8(text);
         String secretKey = "25eace5393646842f0d0c3fb2ac7d3cfa15c052436ee86b5406a8433f54d24a5";
         String HASH_ALGORITHM = "HmacSHA256";
@@ -100,20 +100,20 @@ class MobileUtils {
         return UUID.randomUUID().toString().toLowerCase();
     }
 
-    static List<Header> getHeaders(String userAgent) {
+    public static List<Header> getHeaders(String userAgent) {
         List<Header> headersLocal = new ArrayList<Header>();
         headers.forEach((name, value) -> headersLocal.add(new BasicHeader(name, value)));
         headersLocal.add(new BasicHeader("User-Agent", userAgent));
         return headersLocal;
     }
 
-    static List<Header> postHeaders(String userAgent) {
+    public static List<Header> postHeaders(String userAgent) {
         List<Header> headers = getHeaders(userAgent);
         headers.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8"));
         return headers;
     }
 
-    static InstagramAgent randUserAgent() {
+    public static InstagramAgent randUserAgent() {
         Random rand = new Random();
         InstagramAgent agent = new InstagramAgent();
 

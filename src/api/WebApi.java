@@ -1,7 +1,7 @@
 package api;
 
-import api.models.ListWithCursor;
-import api.models.WebFullUser;
+import api.model.ListWithCursor;
+import api.model.WebFullUser;
 import connector.Connector;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

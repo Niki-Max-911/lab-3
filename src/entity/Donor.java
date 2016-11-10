@@ -1,8 +1,8 @@
 package entity;
 
 import api.WebApi;
-import api.models.ListWithCursor;
-import api.models.WebFullUser;
+import api.model.ListWithCursor;
+import api.model.WebFullUser;
 import connector.ConnectionFactory;
 import connector.Connector;
 import exception.NoPageException;

@@ -1,9 +1,9 @@
 package streem;
 
 import api.Mobile;
-import api.models.FeedPost;
-import api.models.ListWithCursor;
-import api.models.User;
+import api.model.FeedPost;
+import api.model.ListWithCursor;
+import api.model.User;
 import entity.Donor;
 import lombok.Getter;
 

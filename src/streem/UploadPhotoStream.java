@@ -2,7 +2,7 @@ package streem;
 
 import api.Mobile;
 import api.WebApi;
-import api.models.FeedPost;
+import api.model.FeedPost;
 import entity.Donor;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package api.models;
+package api.model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

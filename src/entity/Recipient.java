@@ -1,7 +1,7 @@
 package entity;
 
 import api.Mobile;
-import api.models.FeedPost;
+import api.model.FeedPost;
 import connector.ConnectionFactory;
 import connector.Connector;
 import exception.AuthenticationException;

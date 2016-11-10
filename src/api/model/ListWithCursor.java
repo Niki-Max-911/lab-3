@@ -1,4 +1,4 @@
-package api.models;
+package api.model;
 
 import java.util.Collection;
 import java.util.LinkedList;

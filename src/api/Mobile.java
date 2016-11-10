@@ -1,9 +1,9 @@
 package api;
 
-import api.models.FeedPost;
-import api.models.ListWithCursor;
-import api.models.ModelParser;
-import api.models.User;
+import api.model.FeedPost;
+import api.model.ListWithCursor;
+import api.model.ModelParser;
+import api.model.User;
 import connector.Connector;
 import lombok.extern.java.Log;
 import org.apache.http.Header;
