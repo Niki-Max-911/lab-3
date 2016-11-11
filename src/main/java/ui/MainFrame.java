@@ -4,7 +4,6 @@ import entity.Donor;
 import entity.PhotoCloner;
 import entity.Recipient;
 import exception.AuthenticationException;
-import exception.NoPageException;
 import product.Version;
 
 import javax.swing.*;
@@ -75,12 +74,12 @@ public class MainFrame extends JFrame {
         ActionListener btnStartListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                try {
+//                try {
                     Donor.donor.setLink(MainFrame.this.donorPnl.getDonorLink());
-                } catch (NoPageException e1) {
-                    JOptionPane.showMessageDialog(MainFrame.this, "Страница не найдена!");
-                    return;
-                } // загружаю сторінку
+//                } catch (NoPageException e1) {
+//                    JOptionPane.showMessageDialog(MainFrame.this, "Страница не найдена!");
+//                    return;
+//                } // загружаю сторінку
 
                 if (MainFrame.this.photoCloner.getRecipientList().isEmpty()) {
                     JOptionPane.showMessageDialog(MainFrame.this, "Не добавили аккаунты!");

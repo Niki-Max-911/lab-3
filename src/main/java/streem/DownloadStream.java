@@ -56,7 +56,7 @@ public class DownloadStream implements Runnable {
     private void finish() {
         processFinished = true;
         synchronized (photoQueue) {
-            photoQueue.notify();
+            photoQueue.notifyAll();
         }
     }
 }

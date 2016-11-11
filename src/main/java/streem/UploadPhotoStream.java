@@ -19,14 +19,18 @@ public class UploadPhotoStream implements Runnable {
     private Mobile mobile;
     private BlockingQueue<FeedPost> photoQueue;
 
-    private AtomicInteger countLoaded = new AtomicInteger(0);
+    private AtomicInteger countLoaded;
     private AtomicBoolean photoUploaded;
     private List<FeedPost> list;
+
+    {
+        countLoaded = new AtomicInteger(0);
+        photoUploaded = new AtomicBoolean(false);
+    }
 
     public UploadPhotoStream(Mobile mob, BlockingQueue<FeedPost> photoQueue) {
         this.mobile = mob;
         this.photoQueue = photoQueue;
-        photoUploaded = new AtomicBoolean(false);
     }
 
     @Override
