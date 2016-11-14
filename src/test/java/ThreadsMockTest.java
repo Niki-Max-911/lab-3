@@ -3,13 +3,17 @@ import api.model.FeedPost;
 import api.model.ListWithCursor;
 import api.model.User;
 import entity.Donor;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import streem.DownloadStream;
 import streem.UploadPhotoStream;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -70,7 +74,6 @@ public class ThreadsMockTest {
         when(mobileMock.getUserFeed(eq(userId.toString()))).thenReturn(feedPosts);
     }
 
-    @Ignore
     @Test
     public void photoCloningThreadsTest() throws InterruptedException {
         Assert.assertEquals("Photo queue should be empty", 0, photoQueue.size());
@@ -82,10 +85,11 @@ public class ThreadsMockTest {
         DownloadStream downloadPhotoStream = new DownloadStream(mobileMock, uploadPhotoStream, photoQueue);
         Assert.assertEquals("Count downloaded photos before start thread", 0, downloadPhotoStream.getCountDownloaded());
 
+
 //        start threads
+        ExecutorService threadPool = Executors.newFixedThreadPool(2);
         Stream.of(uploadPhotoStream, downloadPhotoStream)
-                .map(Thread::new)
-                .peek(Thread::start);
+                .forEach(threadPool::execute);
 
 
         synchronized (photoQueue) {
@@ -96,8 +100,12 @@ public class ThreadsMockTest {
         Assert.assertEquals("Count downloaded photos", countTestPhotos, downloadPhotoStream.getCountDownloaded());
         Assert.assertEquals("Count photo needs for uploading", countTestPhotos, downloadPhotoStream.getCountNeed());
 
-        //wait for uploading all photos
-        TimeUnit.SECONDS.sleep(10);
+
+//        wait for uploading all photos
+//        upload photo task should notify monitor that execution completed
+        synchronized (photoQueue) {
+            photoQueue.wait();
+        }
 
         Assert.assertEquals("Count photo have already uploaded", countTestPhotos, uploadPhotoStream.getCountUploaded());
         Assert.assertTrue("Is uploading task done", uploadPhotoStream.isPhotoUploaded());

@@ -85,6 +85,9 @@ public class UploadPhotoStream implements Runnable {
         }
 
         photoUploaded.set(true);
+        synchronized (photoQueue){
+            photoQueue.notifyAll();
+        }
     }
 
     public int getCountUploaded() {
