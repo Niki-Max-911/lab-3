@@ -3,10 +3,7 @@ import api.model.FeedPost;
 import api.model.ListWithCursor;
 import api.model.User;
 import entity.Donor;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import streem.DownloadStream;
 import streem.UploadPhotoStream;
 
@@ -73,6 +70,7 @@ public class ThreadsMockTest {
         when(mobileMock.getUserFeed(eq(userId.toString()))).thenReturn(feedPosts);
     }
 
+    @Ignore
     @Test
     public void photoCloningThreadsTest() throws InterruptedException {
         Assert.assertEquals("Photo queue should be empty", 0, photoQueue.size());
