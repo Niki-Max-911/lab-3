@@ -1,7 +1,6 @@
 # IG Cloner (lab-3/4)
 <p>
-<b>UPD: </b>
-LAB-4;
+<b>UPD: </b> LAB-4.
 <br/>
 addded Docer file for build/run/test current application in <b>Docker</b> java containcer.	
 <br/>
@@ -19,6 +18,8 @@ I use following docker operation for create <b>Docker</b> image/container and st
 	<li>docker run --rm --name mvn-tester -it --privileged -e DISPLAY=$DISPLAY mvn</li>
 </ul>
 </p>
+
+<hr/>
 
 <h3>Required software:</h3>
 <ul>
