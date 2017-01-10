@@ -2,14 +2,14 @@
 <p>
 <b>UPD: </b> LAB-4.
 <br/>
-addded Docer file for build/run/test current application in <b>Docker</b> java containcer.	
+First of all: added Docker file for build/run/test current application in <b>Docker</b> java container.
 <br/>
-Operation build contain also test executing.
-Such as result we can't see opened java desctop UI application but we can see StackTrace trouble desriprion. To my mind issue is related with OS libraries of using UI in it.
+Operation build contains also test executing.
+Such as result we can't see opened java desktop UI application but we can see StackTrace trouble description. To my mind issue is related with OS libraries of using UI in it.
 
 <br/>
 
-Also we can use <b>Docker</b> run -v option for receiving builded application and run it on local PC.
+Also we can use <b>Docker</b> run -v option for receiving built application and run it on own local PC.
 
 <br/>
 I use following docker operation for create <b>Docker</b> image/container and start them.
