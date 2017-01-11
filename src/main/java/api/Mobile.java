@@ -56,7 +56,7 @@ public class Mobile {
     }
 
     public void firstRequest() {
-        HttpUriRequest request = RequestBuilder.get().setUri("/main/java/api/v1/si/fetch_headers/")
+        HttpUriRequest request = RequestBuilder.get().setUri("/api/v1/si/fetch_headers/")
                 .addParameter("guid", uuid.replaceAll("-", "")).addParameter("challenge_type", "signup").build();
         request.setHeaders(getHeaders.toArray(new Header[6]));
 
@@ -79,7 +79,7 @@ public class Mobile {
         String entityStr = MobileUtils.signEnity(params);
         StringEntity entity = new StringEntity(entityStr, Charset.forName("UTF-8"));
 
-        HttpUriRequest request = RequestBuilder.post().setUri("/main/java/api/v1/accounts/login/").setEntity(entity).build();
+        HttpUriRequest request = RequestBuilder.post().setUri("/api/v1/accounts/login/").setEntity(entity).build();
         request.setHeaders(postHeaders.toArray(new Header[7]));
 
         try {
@@ -96,7 +96,7 @@ public class Mobile {
 
     public ListWithCursor<User> searchByUserName(String userName) {
         log.info("start search BY USER-NAME;");
-        HttpUriRequest request = RequestBuilder.get().setUri("/main/java/api/v1/users/search/").addParameter("q", userName)
+        HttpUriRequest request = RequestBuilder.get().setUri("/api/v1/users/search/").addParameter("q", userName)
                 .build();
         request.setHeaders(getHeaders.toArray(new Header[6]));
 
@@ -124,7 +124,7 @@ public class Mobile {
 
     public ListWithCursor<FeedPost> getUserFeed(String userId, String maxId) {
         log.info("get USER FEED;");
-        RequestBuilder builder = RequestBuilder.get().setUri("/main/java/api/v1/feed/user/" + userId + "/");
+        RequestBuilder builder = RequestBuilder.get().setUri("/api/v1/feed/user/" + userId + "/");
         if (maxId != null && !maxId.isEmpty())
             builder.addParameter("max_id", maxId);
         HttpUriRequest request = builder.build();
@@ -180,7 +180,7 @@ public class Mobile {
                 .addTextBody("_uuid", uuid).addTextBody("image_compression", jsnCompresion.toString())
                 .addTextBody("upload_id", MobileUtils.getTimesmap()).addPart("photo", fileBodyToUpLoad).build();
 
-        HttpUriRequest request = RequestBuilder.post().setUri("/main/java/api/v1/upload/photo/").setEntity(entity).build();
+        HttpUriRequest request = RequestBuilder.post().setUri("/api/v1/upload/photo/").setEntity(entity).build();
         request.setHeaders(getHeaders.toArray(new Header[6]));
         request.addHeader(entity.getContentType());
         try {
@@ -229,7 +229,7 @@ public class Mobile {
         String entityStr = MobileUtils.signEnity(params.toString());
         StringEntity entity = new StringEntity(entityStr, Charset.forName("UTF-8"));
 
-        HttpUriRequest request = RequestBuilder.post().setUri("/main/java/api/v1/media/configure/").setEntity(entity).build();
+        HttpUriRequest request = RequestBuilder.post().setUri("/api/v1/media/configure/").setEntity(entity).build();
         request.setHeaders(postHeaders.toArray(new Header[7]));
 
         try {
